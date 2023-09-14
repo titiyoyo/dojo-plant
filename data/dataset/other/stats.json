@@ -1,0 +1,389 @@
+{
+    "pinus_pinea": {
+        "count": 68
+    },
+    "pistaceas_atlantica": {
+        "count": 143
+    },
+    "rhannus_lyciodes": {
+        "count": 432
+    },
+    "prunus_dulcis": {
+        "count": 72
+    },
+    "pino_halepensis": {
+        "count": 1382
+    },
+    "ceratonia_siliqua": {
+        "count": 103
+    },
+    "pistaceas_terabinthus": {
+        "count": 202
+    },
+    "celtis_australis": {
+        "count": 1292
+    },
+    "pistacea_vera": {
+        "count": 68
+    },
+    "pistaceas_lentiscus": {
+        "count": 353
+    },
+    "ulmus_minor": {
+        "count": 96
+    },
+    "quercus_faginea": {
+        "count": 175
+    },
+    "olea_europaea": {
+        "count": 153
+    },
+    "quercus_suber": {
+        "count": 148
+    },
+    "laurus_nobilis": {
+        "count": 29
+    },
+    "punica_granatum": {
+        "count": 15
+    },
+    "rhannus_alaternus": {
+        "count": 55
+    },
+    "morus_nigra": {
+        "count": 10
+    },
+    "malus_silvestre": {
+        "count": 7
+    },
+    "arbustus_unedo": {
+        "count": 15
+    },
+    "fraxinus_angustifolia": {
+        "count": 105
+    },
+    "phillerea_angustifolia": {
+        "count": 3
+    },
+    "tetraclinis_articulata": {
+        "count": 19
+    },
+    "morus_alba": {
+        "count": 11
+    },
+    "schinus_molle": {
+        "count": 2
+    },
+    "quercus_ilex": {
+        "count": 18
+    },
+    "quercus_fraineto": {
+        "count": 1
+    },
+    "mirtus_communis": {
+        "count": 13
+    },
+    "populus_nigra": {
+        "count": 52
+    },
+    "castanea_sativa": {
+        "count": 2
+    },
+    "quercus_coccifera": {
+        "count": 51
+    },
+    "juniperus_thurifera": {
+        "count": 1235
+    },
+    "ligustru_vulgaris": {
+        "count": 2
+    },
+    "ramnus_alaternus": {
+        "count": 1
+    },
+    "quercus_pubescens": {
+        "count": 15
+    },
+    "punica_granata": {
+        "count": 7
+    },
+    "myrtus_communis": {
+        "count": 12
+    },
+    "viburnum_lucida": {
+        "count": 2
+    },
+    "arbutus_unedo": {
+        "count": 2
+    },
+    "pistacia_lentiscus": {
+        "count": 3
+    },
+    "pruns_domestica": {
+        "count": 1
+    },
+    "crataegus_monogina": {
+        "count": 1
+    },
+    "morus_albo_niger": {
+        "count": 7
+    },
+    "cydonia_oblunga": {
+        "count": 4
+    },
+    "ziziphus_jujuba": {
+        "count": 2
+    },
+    "fucus_carica": {
+        "count": 9
+    },
+    "crataegus_azarolus": {
+        "count": 1
+    },
+    "sorbus_aucupania": {
+        "count": 1
+    },
+    "ephedra_fragilis": {
+        "count": 5
+    },
+    "cistus": {
+        "count": 4
+    },
+    "eriobotria_japonica": {
+        "count": 1
+    },
+    "rosmarinus_officinalis": {
+        "count": 10
+    },
+    "salvia_officinalis": {
+        "count": 1
+    },
+    "lavandula_officinalis": {
+        "count": 2
+    },
+    "corylus_avellana": {
+        "count": 8
+    },
+    "prunis_dulcis": {
+        "count": 2
+    },
+    "vitex_agnus-castus": {
+        "count": 1
+    },
+    "populus_nigra_alba": {
+        "count": 1
+    },
+    "prunus_persica": {
+        "count": 7
+    },
+    "prunus_spinosa": {
+        "count": 1
+    },
+    "diospyrus_kaki": {
+        "count": 1
+    },
+    "prunus_armeniaca": {
+        "count": 1
+    },
+    "polyscias_fulva": {
+        "count": 4
+    },
+    "warburgia_ugandensis": {
+        "count": 4
+    },
+    "markhamia_lutea": {
+        "count": 1280
+    },
+    "croton_megerocapus": {
+        "count": 27
+    },
+    "cinnamomum_camphora": {
+        "count": 116
+    },
+    "albizia_schimperiana": {
+        "count": 214
+    },
+    "percea_americana": {
+        "count": 22
+    },
+    "croton_megalocarpus": {
+        "count": 28
+    },
+    "milicia_excelsa": {
+        "count": 457
+    },
+    "leucaena_leucocephala": {
+        "count": 8
+    },
+    "jacaranda_mimosifolia": {
+        "count": 102
+    },
+    "erythrina_abyssinica": {
+        "count": 3
+    },
+    "platanus_hispanica": {
+        "count": 2
+    },
+    "markhamia_obtusifolia": {
+        "count": 54
+    },
+    "cordia_africana": {
+        "count": 2
+    },
+    "pinus_patula": {
+        "count": 78
+    },
+    "juniperus_procera": {
+        "count": 1034
+    },
+    "croton_macrostachyus": {
+        "count": 37
+    },
+    "cupressus_lusitanica": {
+        "count": 4
+    },
+    "prunus_africana": {
+        "count": 2666
+    },
+    "tectona_grandis": {
+        "count": 50
+    },
+    "grevellia_robusta": {
+        "count": 475
+    },
+    "ficus_sur": {
+        "count": 29
+    },
+    "cedrela_odorata": {
+        "count": 6
+    },
+    "prunus_domestica": {
+        "count": 3
+    },
+    "casuarina_junghuniana": {
+        "count": 1
+    },
+    "eucalyptus_makulata": {
+        "count": 2
+    },
+    "moringa_olifera": {
+        "count": 9
+    },
+    "newtonia_buchananii": {
+        "count": 79
+    },
+    "musaceae": {
+        "count": 1
+    },
+    "newtonia_bachanii": {
+        "count": 18
+    },
+    "eucalyptus_tereticornis": {
+        "count": 17
+    },
+    "malus_domestica": {
+        "count": 2
+    },
+    "ocotea_usambarensis": {
+        "count": 10
+    },
+    "pyrus": {
+        "count": 3
+    },
+    "podocarpus_usambarensis": {
+        "count": 5
+    },
+    "eriobotrya_japonica": {
+        "count": 2
+    },
+    "eucalyptus_grandis": {
+        "count": 65
+    },
+    "moringa_oleifera": {
+        "count": 3
+    },
+    "khaya_anthotheca": {
+        "count": 7
+    },
+    "albizia_lebbeck": {
+        "count": 12
+    },
+    "dodonaea_viscosa": {
+        "count": 2
+    },
+    "mamea_usambarensis": {
+        "count": 2
+    },
+    "syzygium_cumini": {
+        "count": 2
+    },
+    "ficus_thorningii": {
+        "count": 6
+    },
+    "allanblackia_stuhlmanii": {
+        "count": 12
+    },
+    "coffea_canephora": {
+        "count": 1
+    },
+    "eucalyptus_saligna": {
+        "count": 2
+    },
+    "acrocarpus_flaxinifolius": {
+        "count": 1
+    },
+    "macadamia_tetrephylla": {
+        "count": 1
+    },
+    "albizia_gummifera": {
+        "count": 1
+    },
+    "makhamea_lutea": {
+        "count": 2
+    },
+    "bridelia_micrantha": {
+        "count": 1
+    },
+    "populus_alba": {
+        "count": 10
+    },
+    "croton_macros_tachyus": {
+        "count": 5
+    },
+    "milicia_exelsa": {
+        "count": 1429
+    },
+    "spathodea_campanuleta": {
+        "count": 775
+    },
+    "maesopsis_eminii": {
+        "count": 262
+    },
+    "dombeya_rotundifolia": {
+        "count": 132
+    },
+    "albizia_coriaria": {
+        "count": 39
+    },
+    "grevillea_robusta": {
+        "count": 16
+    },
+    "maesa_lanceolata": {
+        "count": 2
+    },
+    "ficus_sycomorus": {
+        "count": 4
+    },
+    "ficus_natalensis": {
+        "count": 11
+    },
+    "syzygium_cordatum": {
+        "count": 20
+    },
+    "mangifera_indica": {
+        "count": 1
+    },
+    "bambusa_vulgaris": {
+        "count": 5
+    }
+}
