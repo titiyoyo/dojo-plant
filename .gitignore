@@ -44,7 +44,7 @@ package-lock.json
 geckodriver.log
 *.iml
 
-# jetbrains IDE stuff
+# ide files
+.vscode/
 *.iml
 .idea/
-
