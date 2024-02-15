@@ -1,0 +1,7 @@
+.pyc
+.gradient
+.ipynb_checkpoints
+__pycache__
+..gitignore.swp
+out
+test-models
