@@ -1,0 +1,14 @@
+.cache
+.config
+.ipython
+.jupyter
+.keras
+.local
+.npm
+.ipynb_checkpoints
+
+docker-compose.override.yml
+
+data/data
+data/out
+__pycache__

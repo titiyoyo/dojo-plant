@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  jupyter:
+    image: jupyter/tensorflow-notebook
+    restart: always
+    user: root
+    ports:
+      - 10000:8888
+    environment:
+      GRANT_SUDO: 'yes'
+    volumes:
+      - ./data:/home/jovyan
+    networks:
+      - dojoml
+      - traefik
+
+networks:
+  dojoml:
+  traefik:
+    external: true
+

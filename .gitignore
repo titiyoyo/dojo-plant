@@ -1,12 +1,2 @@
-.cache
-.config
-.ipython
-.jupyter
-.keras
-.local
-.npm
-.ipynb_checkpoints
-
-data/dojo/data
-data/dojo/out
-__pycache__
+.idea
+.vscode
