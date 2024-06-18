@@ -101,11 +101,11 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // return CameraPreview(_controller);
             return Stack(
               children: [
-                // Positioned.fill(
-                //   child: AspectRatio(
-                //       aspectRatio: 4/3,
-                //       child: CameraPreview(_controller)),
-                // ),
+                Positioned.fill(
+                  child: AspectRatio(
+                      aspectRatio: 1,
+                      child: CameraPreview(_controller)),
+                ),
                 Positioned(
                     bottom: screenHeight * 0.25,
                     left: 0.0,

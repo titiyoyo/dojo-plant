@@ -161,7 +161,6 @@
 				75B2F9AAC225C0E5D03686FA /* Pods-RunnerTests.release.xcconfig */,
 				77481754C179150F8EFC07C8 /* Pods-RunnerTests.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -471,12 +470,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 6YFG5392L7;
 				ENABLE_BITCODE = NO;
+				FLUTTER_APPLICATION_PATH = "/Users/terence/Dev/projects/pro/rf/dojo-ml/clients/flutter";
+				FLUTTER_TARGET = "/Users/terence/Dev/projects/pro/rf/dojo-ml/clients/flutter/lib/main.dart";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PACKAGE_CONFIG = "/Users/terence/Dev/projects/pro/rf/dojo-ml/clients/flutter/.dart_tool/package_config.json";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.testFlutter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -653,12 +656,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 6YFG5392L7;
 				ENABLE_BITCODE = NO;
+				FLUTTER_APPLICATION_PATH = "/Users/terence/Dev/projects/pro/rf/dojo-ml/clients/flutter";
+				FLUTTER_TARGET = "/Users/terence/Dev/projects/pro/rf/dojo-ml/clients/flutter/lib/main.dart";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PACKAGE_CONFIG = "/Users/terence/Dev/projects/pro/rf/dojo-ml/clients/flutter/.dart_tool/package_config.json";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.testFlutter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -675,12 +682,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = 6YFG5392L7;
 				ENABLE_BITCODE = NO;
+				FLUTTER_APPLICATION_PATH = "/Users/terence/Dev/projects/pro/rf/dojo-ml/clients/flutter";
+				FLUTTER_TARGET = "/Users/terence/Dev/projects/pro/rf/dojo-ml/clients/flutter/lib/main.dart";
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PACKAGE_CONFIG = "/Users/terence/Dev/projects/pro/rf/dojo-ml/clients/flutter/.dart_tool/package_config.json";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.testFlutter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
