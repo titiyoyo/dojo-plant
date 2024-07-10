@@ -1,8 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:image/image.dart' as img;
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:opencv_4/factory/pathfrom.dart';
+import 'package:opencv_dart/opencv_dart.dart' as cv;
+import 'package:opencv_4/opencv_4.dart' as cv2;
+import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -61,27 +68,17 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     _initializeControllerFuture = _controller.initialize();
   }
 
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   final CameraController? cameraController = _controller;
-  //
-  //   // App state changed before we got the chance to initialize.
-  //   if (cameraController == null || !cameraController.value.isInitialized) {
-  //     return;
-  //   }
-  //
-  //   if (state == AppLifecycleState.inactive) {
-  //     cameraController.dispose();
-  //   } else if (state == AppLifecycleState.resumed) {
-  //     onNewCameraSelected(cameraController.description);
-  //   }
-  // }
-
   @override
   void dispose() {
     // Dispose of the controller when the widget is disposed.
     _controller.dispose();
     super.dispose();
+  }
+
+  Future<String> getAssetPath(String imagePath) async {
+    final directory = await getApplicationDocumentsDirectory();
+    var file = File("${directory.path}/assets/${imagePath}");
+    return file.path;
   }
 
   @override
@@ -138,9 +135,15 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
             // Attempt to take a picture and get the file `image`
             // where it was saved.
-            final image = await _controller.takePicture();
+            // final image = await _controller.takePicture();
 
             if (!context.mounted) return;
+
+
+            var path = await getAssetPath('BlurryDavid.jpg');
+            print(path);
+            final toto = cv2.Cv2.laplacian(pathString: "https://upload.wikimedia.org/wikipedia/commons/7/79/BlurryDavid.jpg", depth: 255, pathFrom: CVPathFrom.URL);
+            print(await toto);
 
             // If the picture was taken, display it on a new screen.
             await Navigator.of(context).push(
@@ -148,7 +151,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                 builder: (context) => DisplayPictureScreen(
                   // Pass the automatically generated path to
                   // the DisplayPictureScreen widget.
-                  imagePath: image.path,
+                  imagePath: path,
                 ),
               ),
             );
@@ -175,7 +178,21 @@ class DisplayPictureScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Display the Picture')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
-      body: Image.file(File(imagePath)),
+      body: Center(
+        child: AspectRatio(
+          aspectRatio: 487 / 451,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fitWidth,
+                alignment: FractionalOffset.topCenter,
+                // image: Image.file(File(imagePath)).image,
+                image: Image(image: AssetImage('assets/BlurryDavid.jpg')).image
+              )
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
