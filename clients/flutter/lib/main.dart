@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:image/image.dart' as Img;
 import 'package:opencv_dart/opencv_dart.dart' as cv;
-import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -73,10 +69,14 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     super.dispose();
   }
 
-  Future<String> getAssetPath(String imagePath) async {
-    final directory = await getApplicationDocumentsDirectory();
-    var file = File("${directory.path}/assets/${imagePath}");
-    return file.path;
+  Future<Uint8List> getAssetPath(String imagePath) async {
+    // final directory = await getApplicationDocumentsDirectory();
+    // var file = File("${directory.path}/assets/${imagePath}");
+    // return file.path;
+
+    final data = await DefaultAssetBundle.of(context)
+        .load(imagePath);
+    return data.buffer.asUint8List();
   }
 
   @override
@@ -132,7 +132,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             if (!context.mounted) return;
 
             cv.Mat image =
-                cv.imread(await getAssetPath('assets/BlurryDavid.jpg'));
+                cv.imdecode(await getAssetPath('assets/BlurryDavid.jpg'), cv.IMREAD_COLOR);
             cv.Mat gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY);
             cv.Scalar blurriness =
                 cv.laplacian(gray, cv.MatType.CV_64F).variance();
