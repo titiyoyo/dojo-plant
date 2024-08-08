@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:image/image.dart' as img;
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+import 'package:image/image.dart' as Img;
 import 'package:opencv_4/factory/pathfrom.dart';
-import 'package:opencv_dart/opencv_dart.dart' as cv;
 import 'package:opencv_4/opencv_4.dart' as cv2;
 import 'package:path_provider/path_provider.dart';
 
@@ -81,6 +80,17 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     return file.path;
   }
 
+  double? computeVariance(Uint8List? values) {
+    if (values == null) {
+      return null;
+    }
+
+    final length = values.length;
+    final mean = values.reduce((a, b) => a + b) / length;
+    final se = values.map((e) => pow(e - mean, 2));
+    return se.reduce((a, b) => a + b) / se.length;
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -133,17 +143,26 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // Ensure that the camera is initialized.
             await _initializeControllerFuture;
 
-            // Attempt to take a picture and get the file `image`
-            // where it was saved.
-            // final image = await _controller.takePicture();
-
             if (!context.mounted) return;
 
+            Directory appDocDirectory = await getApplicationDocumentsDirectory();
 
-            var path = await getAssetPath('BlurryDavid.jpg');
-            print(path);
-            final toto = cv2.Cv2.laplacian(pathString: "https://upload.wikimedia.org/wikipedia/commons/7/79/BlurryDavid.jpg", depth: 255, pathFrom: CVPathFrom.URL);
-            print(await toto);
+            final greyScaleImage = await cv2.Cv2.cvtColor(
+                pathString: "https://images.ctfassets.net/u4vv676b8z52/6Gb68j3cdLoe6wLn8qN6V2/c551e69e8bc614e80b29deb2e050adf4/blurry-vision-at-night-678x446.gif?fm=jpg&q=80",
+                pathFrom: CVPathFrom.URL,
+                outputType: cv2.Cv2.COLOR_BGR2GRAY
+            );
+
+            await Img.writeFile("${appDocDirectory.path}/img.test", greyScaleImage ?? Uint8List.fromList([]));
+            final laplacian = await cv2.Cv2.laplacian(
+              pathString: "${appDocDirectory.path}/img.test",
+              pathFrom: CVPathFrom.URL,
+              depth: 0,
+            );
+
+            //double? variance = this.computeVariance(Uint8List.fromList([1,2,3,4]));
+            double? variance = this.computeVariance(laplacian);
+            print(variance);
 
             // If the picture was taken, display it on a new screen.
             await Navigator.of(context).push(
@@ -151,7 +170,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                 builder: (context) => DisplayPictureScreen(
                   // Pass the automatically generated path to
                   // the DisplayPictureScreen widget.
-                  imagePath: path,
+                  imageBytes: laplacian == null ? Uint8List.fromList([1,2,3,4]) : laplacian
                 ),
               ),
             );
@@ -168,9 +187,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
 // A widget that displays the picture taken by the user.
 class DisplayPictureScreen extends StatelessWidget {
-  final String imagePath;
+  final Uint8List imageBytes;
 
-  const DisplayPictureScreen({super.key, required this.imagePath});
+  const DisplayPictureScreen({super.key, required this.imageBytes});
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +206,7 @@ class DisplayPictureScreen extends StatelessWidget {
                 fit: BoxFit.fitWidth,
                 alignment: FractionalOffset.topCenter,
                 // image: Image.file(File(imagePath)).image,
-                image: Image(image: AssetImage('assets/BlurryDavid.jpg')).image
+                image: Image.memory(this.imageBytes).image
               )
             ),
           ),
