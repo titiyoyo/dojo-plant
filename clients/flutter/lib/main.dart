@@ -6,8 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:image/image.dart' as Img;
-import 'package:opencv_4/factory/pathfrom.dart';
-import 'package:opencv_4/opencv_4.dart' as cv2;
+import 'package:opencv_dart/opencv_dart.dart' as cv;
 import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
@@ -80,17 +79,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     return file.path;
   }
 
-  double? computeVariance(Uint8List? values) {
-    if (values == null) {
-      return null;
-    }
-
-    final length = values.length;
-    final mean = values.reduce((a, b) => a + b) / length;
-    final se = values.map((e) => pow(e - mean, 2));
-    return se.reduce((a, b) => a + b) / se.length;
-  }
-
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -110,8 +98,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
               children: [
                 Positioned.fill(
                   child: AspectRatio(
-                      aspectRatio: 1,
-                      child: CameraPreview(_controller)),
+                      aspectRatio: 1, child: CameraPreview(_controller)),
                 ),
                 Positioned(
                     bottom: screenHeight * 0.25,
@@ -120,8 +107,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                     top: screenHeight * 0.25,
                     child: CustomPaint(
                       painter: BorderPainter(),
-                    )
-                ),
+                    )),
                 // Positioned(
                 //   bottom : 0,
                 //   child: Container(), //other widgets like capture etc here
@@ -145,35 +131,20 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
             if (!context.mounted) return;
 
-            Directory appDocDirectory = await getApplicationDocumentsDirectory();
-
-            final greyScaleImage = await cv2.Cv2.cvtColor(
-                pathString: "https://images.ctfassets.net/u4vv676b8z52/6Gb68j3cdLoe6wLn8qN6V2/c551e69e8bc614e80b29deb2e050adf4/blurry-vision-at-night-678x446.gif?fm=jpg&q=80",
-                pathFrom: CVPathFrom.URL,
-                outputType: cv2.Cv2.COLOR_BGR2GRAY
-            );
-
-            await Img.writeFile("${appDocDirectory.path}/img.test", greyScaleImage ?? Uint8List.fromList([]));
-            final laplacian = await cv2.Cv2.laplacian(
-              pathString: "${appDocDirectory.path}/img.test",
-              pathFrom: CVPathFrom.URL,
-              depth: 0,
-            );
-
-            //double? variance = this.computeVariance(Uint8List.fromList([1,2,3,4]));
-            double? variance = this.computeVariance(laplacian);
-            print(variance);
+            cv.Mat image =
+                cv.imread(await getAssetPath('assets/BlurryDavid.jpg'));
+            cv.Mat gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY);
+            cv.Scalar blurriness =
+                cv.laplacian(gray, cv.MatType.CV_64F).variance();
+            print(blurriness);
 
             // If the picture was taken, display it on a new screen.
-            await Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(
+            await Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => DisplayPictureScreen(
                   // Pass the automatically generated path to
                   // the DisplayPictureScreen widget.
-                  imageBytes: laplacian == null ? Uint8List.fromList([1,2,3,4]) : laplacian
-                ),
-              ),
-            );
+                  imageBytes: cv.imencode(".jpg", image).$2),
+            ));
           } catch (e) {
             // If an error occurs, log the error to the console.
             print(e);
@@ -202,13 +173,11 @@ class DisplayPictureScreen extends StatelessWidget {
           aspectRatio: 487 / 451,
           child: Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                fit: BoxFit.fitWidth,
-                alignment: FractionalOffset.topCenter,
-                // image: Image.file(File(imagePath)).image,
-                image: Image.memory(this.imageBytes).image
-              )
-            ),
+                image: DecorationImage(
+                    fit: BoxFit.fitWidth,
+                    alignment: FractionalOffset.topCenter,
+                    // image: Image.file(File(imagePath)).image,
+                    image: Image.memory(imageBytes).image)),
           ),
         ),
       ),
