@@ -130,8 +130,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
             if (!context.mounted) return;
 
-            final imagePath = await _controller.takePicture();
-            cv.Mat image = cv.imread(imagePath.path);
+            cv.Mat image = cv.imread(_controller.takePicture().toString());
             cv.Mat gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY);
             cv.Scalar blurriness =
                 cv.laplacian(gray, cv.MatType.CV_64F).variance();
@@ -187,8 +186,8 @@ class DisplayPictureScreen extends StatelessWidget {
 class BorderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    const width = 3.0;
-    const radius = 20.0;
+    final width = 3.0;
+    final radius = 20.0;
     final tRadius = 2 * radius;
     final rect = Rect.fromLTWH(
       width,
