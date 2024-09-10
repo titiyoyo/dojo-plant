@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -11,11 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginDemoState extends State<LoginScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  String? username;
+  String? password;
 
   @override
   Widget build(BuildContext context) {
@@ -32,19 +31,26 @@ class _LoginDemoState extends State<LoginScreen> {
               child: Center(
                 child: Container(
                   width: 200,
-                  height: 150,
-                  child: Image.asset('asset/images/flutter-logo.png')
+                  height: 300,
+                  child: Image.asset('images/usf-logo-blue.png')
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
+                  labelStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(),
                   labelText: 'Email',
                   hintText: 'Enter valid email id as abc@gmail.com'
                 ),
+                onChanged: (value) {
+                  setState(() {
+                    username = value;
+                  });
+                }
               ),
             ),
             Padding(
@@ -52,21 +58,18 @@ class _LoginDemoState extends State<LoginScreen> {
                 left: 15.0, right: 15.0, top: 15, bottom: 0
               ),
               child: TextField(
+                style: TextStyle(color: Colors.black),
                 obscureText: true,
                 decoration: InputDecoration(
+                  labelStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(),
                   labelText: 'Password',
-                  hintText: 'Enter secure password'
+                  hintText: 'Enter secure password',
                 ),
-                onSubmitted: (value){
-                  // value is entered text after ENTER press
-                  // you can also call any function here or make setState() to assign value to other variable
-                  ApiClient client = ApiClient();
-                  client.post(
-                    dotenv.env['LOGIN_PATH'],
-                    body,
-                    headers
-                  );
+                onChanged: (value){
+                  setState(() {
+                    password = value;
+                  });
                 },
               ),
             ),
@@ -85,9 +88,22 @@ class _LoginDemoState extends State<LoginScreen> {
               decoration: BoxDecoration(
                   color: Colors.blue, borderRadius: BorderRadius.circular(20)),
               child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => FormScreen(camera: globals.camera)));
+                onPressed: () async {
+                  ApiClient client = ApiClient();
+                  String body = jsonEncode({
+                    'username': username,
+                    'password': password
+                  });
+                  http.Response response = await client.post(
+                    dotenv.env['LOGIN_PATH'],
+                    body
+                  );
+
+                  print(response.statusCode);
+
+                  // Navigator.push(
+                  //   context, MaterialPageRoute(builder: (_) => FormScreen(camera: globals.camera))
+                  // );
                 },
                 child: Text(
                   'Login',
@@ -98,7 +114,6 @@ class _LoginDemoState extends State<LoginScreen> {
             SizedBox(
               height: 130,
             ),
-            Text('New User? Create Account')
           ],
         ),
       ),

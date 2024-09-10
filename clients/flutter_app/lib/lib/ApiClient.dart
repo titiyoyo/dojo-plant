@@ -6,23 +6,29 @@ class ApiClient {
 
   Future<http.Response> post(
       String? path,
-      Object? body,
-      Map<String, String>? headers
-      ) {
-    Uri url = Uri(host: host, path: path);
-    return http.post(
-      url,
+      [Object? body,
+      Map<String, String>? headers]
+  ) {
+    Future<http.Response> response = http.post(
+      Uri(
+          scheme: 'https',
+          host: host,
+          path: path
+      ),
       body: body,
       headers: headers,
     );
+
+    return response;
   }
 
   Future<http.Response> get(
       String? path,
-      Map<String, String>? headers
-      ) {
+      [Map<String, String>? headers]
+  ) {
     return http.get(
       Uri(
+          scheme: 'https',
           host: host,
           path: path
       ),
@@ -32,10 +38,11 @@ class ApiClient {
 
   Future<http.Response> delete(
       String? path,
-      Map<String, String>? headers
-      ) {
+      [Map<String, String>? headers]
+  ) {
     return http.delete(
       Uri(
+          scheme: 'https',
           host: host,
           path: path
       ),

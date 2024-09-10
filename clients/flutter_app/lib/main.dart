@@ -25,7 +25,7 @@ Future<void> main() async {
 }
 
 bool isLogged() {
-  return true;
+  return false;
 }
 
 class BarReaderSize {
