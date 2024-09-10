@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import '../globals.dart' as globals;
 import 'FormScreen.dart';
+import '../lib/ApiClient.dart';
+import '../globals.dart' as globals;
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,6 +11,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginDemoState extends State<LoginScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,34 +31,43 @@ class _LoginDemoState extends State<LoginScreen> {
               padding: const EdgeInsets.only(top: 60.0),
               child: Center(
                 child: Container(
-                    width: 200,
-                    height: 150,
-                    /*decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(50.0)),*/
-                    child: Image.asset('asset/images/flutter-logo.png')),
+                  width: 200,
+                  height: 150,
+                  child: Image.asset('asset/images/flutter-logo.png')
+                ),
               ),
             ),
             Padding(
-              //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    hintText: 'Enter valid email id as abc@gmail.com'),
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                  hintText: 'Enter valid email id as abc@gmail.com'
+                ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
-              //padding: EdgeInsets.symmetric(horizontal: 15),
+                left: 15.0, right: 15.0, top: 15, bottom: 0
+              ),
               child: TextField(
                 obscureText: true,
                 decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Enter secure password'),
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                  hintText: 'Enter secure password'
+                ),
+                onSubmitted: (value){
+                  // value is entered text after ENTER press
+                  // you can also call any function here or make setState() to assign value to other variable
+                  ApiClient client = ApiClient();
+                  client.post(
+                    dotenv.env['LOGIN_PATH'],
+                    body,
+                    headers
+                  );
+                },
               ),
             ),
             TextButton(

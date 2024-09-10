@@ -142,6 +142,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: "9357883bdd153ab78cbf9ffa07656e336b8bbb2b5a3ca596b0b27e119f7c7d77"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -244,10 +252,10 @@ packages:
     dependency: "direct main"
     description:
       name: opencv_dart
-      sha256: be09f7ca9fd894ade56963562fe092517e3c798ee78574a9929e89b1aba6f3ce
+      sha256: "56a8279e1e59046b763ff3a50a33556d582035435e0d8bfaaa985e59f32d4e64"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.3"
+    version: "1.2.4"
   path:
     dependency: transitive
     description:
