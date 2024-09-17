@@ -1,25 +1,22 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import '../globals.dart' as globals;
+
 class ApiClient {
   final String? host = dotenv.env['API_HOST'];
+  final String scheme = 'https';
 
   Future<http.Response> post(
       String? path,
       [Object? body,
       Map<String, String>? headers]
   ) {
-    Future<http.Response> response = http.post(
-      Uri(
-          scheme: 'https',
-          host: host,
-          path: path
-      ),
+    return http.post(
+      Uri.parse('https://' + host! + path!),
       body: body,
-      headers: headers,
+      headers: addDefaultHeaders(headers),
     );
-
-    return response;
   }
 
   Future<http.Response> get(
@@ -27,12 +24,8 @@ class ApiClient {
       [Map<String, String>? headers]
   ) {
     return http.get(
-      Uri(
-          scheme: 'https',
-          host: host,
-          path: path
-      ),
-      headers: headers,
+      Uri.parse('https://' + host! + path!),
+      headers: addDefaultHeaders(headers),
     );
   }
 
@@ -41,12 +34,26 @@ class ApiClient {
       [Map<String, String>? headers]
   ) {
     return http.delete(
-      Uri(
-          scheme: 'https',
-          host: host,
-          path: path
-      ),
-      headers: headers,
+      Uri.parse('https://' + host! + path!),
+      headers: addDefaultHeaders(headers),
     );
+  }
+
+  addDefaultHeaders(Map<String, String>? headers) {
+    Map<String, String> headersToSend = {
+      'Content-Type': 'application/json; charset=UTF-8',
+    };
+
+    if (globals.token != null) {
+      headersToSend.addEntries([
+        MapEntry('Authorization', 'Bearer ' + globals.token!)
+      ]);
+    }
+
+    if (headers != null) {
+      headersToSend.addEntries(headers.entries);
+    }
+
+    return headersToSend;
   }
 }

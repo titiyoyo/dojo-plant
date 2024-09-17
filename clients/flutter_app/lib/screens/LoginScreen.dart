@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'FormScreen.dart';
 import '../lib/ApiClient.dart';
@@ -9,10 +10,10 @@ import '../globals.dart' as globals;
 
 class LoginScreen extends StatefulWidget {
   @override
-  _LoginDemoState createState() => _LoginDemoState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginDemoState extends State<LoginScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   String? username;
   String? password;
 
@@ -99,11 +100,14 @@ class _LoginDemoState extends State<LoginScreen> {
                     body
                   );
 
-                  print(response.statusCode);
+                  var decodedResponse = jsonDecode(response.body);
+                  const storage = FlutterSecureStorage();
+                  await storage.write(key: 'token', value: decodedResponse['token']);
+                  globals.setGlobals();
 
-                  // Navigator.push(
-                  //   context, MaterialPageRoute(builder: (_) => FormScreen(camera: globals.camera))
-                  // );
+                  Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => FormScreen(camera: globals.camera))
+                  );
                 },
                 child: Text(
                   'Login',

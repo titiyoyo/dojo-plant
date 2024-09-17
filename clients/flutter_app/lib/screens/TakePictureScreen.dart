@@ -61,7 +61,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Take a picture')),
+      appBar: AppBar(
+          title: Text('Take a picture')
+      ),
       drawer: Appdrawer(),
       // You must wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner until the

@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/screens/GPSOffScreen.dart';
+import 'package:flutter_app/screens/SettingsScreen.dart';
 
 import 'screens/FormScreen.dart';
 import 'globals.dart' as glob;
+
+class DrawerTitle extends Text {
+  const DrawerTitle(super.data);
+
+  @override
+  TextStyle? get style => const TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 21
+  );
+}
 
 class AppdrawerState extends State<StatefulWidget> {
   @override
@@ -12,14 +24,23 @@ class AppdrawerState extends State<StatefulWidget> {
         // Important: Remove any padding from the ListView.
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
+          DrawerHeader(
+            decoration: const BoxDecoration(
+              color: Color.fromRGBO(34, 82, 157, 1.0),
             ),
-            child: Text('TreeWallet Menu'),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 180,
+                  height: 120,
+                  child: Image.asset('images/usf-logo-blue.png', fit: BoxFit.scaleDown)
+                )
+              ],
+            ),
           ),
           ListTile(
-            title: const Text('New Tree'),
+            title: const DrawerTitle('New Tree'),
             onTap: () {
               Navigator.push(
                 context,
@@ -28,10 +49,21 @@ class AppdrawerState extends State<StatefulWidget> {
             },
           ),
           ListTile(
-            title: const Text('Settings'),
+            title: const DrawerTitle('Settings'),
             onTap: () {
-              // Update the state of the app.
-              // ...
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => SettingsScreen())
+              );
+            },
+          ),
+          ListTile(
+            title: const DrawerTitle('GPS OFF'),
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => GPSOffScreen())
+              );
             },
           ),
         ],
