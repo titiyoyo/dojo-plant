@@ -7,8 +7,6 @@
 .npm
 .ipynb_checkpoints
 
+out
+data
 docker-compose.override.yml
-
-data/data
-data/out
-__pycache__
