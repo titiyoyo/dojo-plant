@@ -10,7 +10,8 @@ services:
     environment:
       GRANT_SUDO: 'yes'
     volumes:
-      - ./data:/home/jovyan
+      - ./src:/home/jovyan
+      - ../data:/home/jovyan/data
     networks:
       - dojoml
       - traefik
