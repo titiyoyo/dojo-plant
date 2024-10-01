@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mkdir -p mobilenet/plantnet
+mkdir -p mobilenet/object_detection
+
+wget "https://lab.plantnet.org/seafile/d/01ab6658dad6447c95ae/files/?p=%2Fmobilenet_v3_large_weights_best_acc.tar&dl=1" -O mobilenet/plantnet/mobilenet_v3_large_weights_best_acc.tar
+wget "https://raw.githubusercontent.com/chuanqi305/MobileNet-SSD/refs/heads/master/deploy.prototxt" -O mobilenet/object_detection/deploy.prototxt
+wget "https://github.com/chuanqi305/MobileNet-SSD/raw/refs/heads/master/mobilenet_iter_73000.caffemodel" -O mobilenet/object_detection/mobilenet_iter_73000.caffemodel
