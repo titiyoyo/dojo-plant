@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Template</title>
+  <style>
+    .infos-container {
+      display: table;
+    }
+
+    .infos-container .info {
+      display: table-row;
+    }
+
+    .info .label {
+      font-weight: bold;
+    }
+    .info .value .label {
+      display: table-cell;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h3>Hello</h3>
+  <table>
+    % for row in data:
+      ${makerow(row)}
+    % endfor
+  </table>
+</body>
+</html>
+
+<%def name="makerow(row)">
+  <tr>
+    <td>
+      <div class="image">
+        <img src='${row["file"]}' />
+      </div>
+    </td>
+    <td>
+      <div class="infos-container">
+        ${renderData('green', row['green'])}
+        ${renderData('brown', row['brown'])}
+        ${renderData('blurriness', row['blurriness'])}
+        ${renderData('path', row['file'])}
+        ${renderData('brightness', row['brightness'])}
+      </div>
+    </td>    
+  </tr>
+</%def>
+
+<%def name="renderData(name, value)">
+  <div class="info">
+    <div class="label">${name}</div>
+    <div class="value">${value}</div>
+  </div>  
+</%def>
