@@ -3,6 +3,7 @@ import os, sys, pathlib as p
 import pandas as pd
 from mako.template import Template
 from operator import itemgetter
+from colorama import Fore, Style
 
 # vars
 imgSavePath = 'img'
@@ -33,8 +34,10 @@ if not os.path.exists(imgSavePath):
 if not os.path.exists(reportFilesSavePath):
   os.makedirs(reportFilesSavePath)
 
+print(Fore.CYAN)
 print(f'>> Benchmarking {absPath}')
 print(f'>> Finding all image files')
+print(Style.RESET_ALL)
 
 csvEntries = [ip.processImage(jpgFile, imgSavePath) for jpgFile in jpgFiles[:100]]
 csvEntries.extend(ip.processImage(jpegFile, imgSavePath) for jpegFile in jpegFiles[:100])
