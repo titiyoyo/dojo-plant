@@ -50,8 +50,6 @@ def processImage(file, imgSavePath):
   crop_img = getCroppedImage(img, bbCoords)      
   
   if not (crop_img.size and crop_img.ndim):
-    print(type(img), len(img), img.shape)
-    print(crop_img, bbCoords)
     return {
       'label': label,
       'green': 0,
@@ -79,6 +77,7 @@ def processImage(file, imgSavePath):
 # vérifier que bbcoords est contenue dans l'image
 # utiliser img.shape pour avoir les dimensions de l'image
 def getCroppedImage(img, bbCoords):
+  print(bbCoords, img.shape)  
   startX, startY, endX, endY = bbCoords
     
   startX = int(startX)
@@ -205,7 +204,7 @@ def detect_subject(image):
   # Préparer l'image pour la détection d'objets
   blob = cv2.dnn.blobFromImage(
     image = cv2.resize(image, (bbox['x'], bbox['y'])),
-    scalefactor=0.007843, 
+    scalefactor = 0.007843, 
     size = (bbox['x'], bbox['y']), 
     mean = 127.5
   )
@@ -223,6 +222,11 @@ def detect_subject(image):
       idx = int(detections[0, 0, i, 1])
       box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
       (startX, startY, endX, endY) = box.astype("int")
+      
+      if (endX > w):
+        endX = bbox['x']
+      if (endY > h):
+        endY = bbox['y']
       
       return [startX, startY, endX, endY], idx
     
