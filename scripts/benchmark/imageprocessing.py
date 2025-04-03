@@ -26,7 +26,8 @@ net = cv2.dnn.readNetFromCaffe(
 # Couleurs pour dessiner les bounding boxes
 COLORS = np.random.uniform(0, 255, size=(10, 3))
 
-def processImage(file, imgSavePath):
+def processImage(fileTupple, imgSavePath):
+  file, parent = fileTupple
   head, tail = os.path.split(file)
   processedImagePath = f"{imgSavePath}/{tail}"
 
@@ -35,7 +36,7 @@ def processImage(file, imgSavePath):
   img = cv2.imread(file)
   h, w, c = img.shape
 
-  bbCoords, idx = detect_subject(img)
+  bbCoords, idx, blob = detect_subject(img)
   label = detect_plant_name(file)
   
   if bbCoords is None:
@@ -46,12 +47,13 @@ def processImage(file, imgSavePath):
     imgWithRectangle = drawRectangleFromCoords(img, bbCoords, label, idx)
   
   cv2.imwrite(processedImagePath, imgWithRectangle)
-  
+    
   crop_img = getCroppedImage(img, bbCoords)      
   
   if not (crop_img.size and crop_img.ndim):
     return {
       'label': label,
+      'expectedLabel': parent.name,
       'green': 0,
       'brown': 0,
       'blurriness': 0, 
@@ -66,6 +68,7 @@ def processImage(file, imgSavePath):
 
     return {
       'label': label,
+      'expectedLabel': parent.name,
       'green': greenPercentage,
       'brown': brownPercentage,
       'blurriness': blurriness, 
@@ -203,11 +206,17 @@ def detect_subject(image):
 
   # Préparer l'image pour la détection d'objets
   blob = cv2.dnn.blobFromImage(
-    image = cv2.resize(image, (bbox['x'], bbox['y'])),
-    scalefactor = 0.007843, 
+    #image = cv2.resize(image, (bbox['x'], bbox['y'])),
+    image = cv2.resize(image, (224, 224)),
+    # image = image,
+    scalefactor = 1,
+    #scalefactor = 0.007843, 
     size = (bbox['x'], bbox['y']), 
-    mean = 127.5
+    # size = (h, w), 
+    mean = 127.5,
+    # ddepth = cv2.CV_32F
   )
+  
   net.setInput(blob)
   detections = net.forward()
 
@@ -228,6 +237,6 @@ def detect_subject(image):
       if (endY > h):
         endY = bbox['y']
       
-      return [startX, startY, endX, endY], idx
+      return [startX, startY, endX, endY], idx, blob
     
-  return None, None
+  return None, None, None

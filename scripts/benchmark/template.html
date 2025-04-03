@@ -33,6 +33,7 @@
 <%def name="makerow(row)">
   <tr>
     <td>
+      <h6>image</h6>
       <div class="image">
         <img src='${row["file"]}' />
       </div>
@@ -40,6 +41,7 @@
     <td>
       <div class="infos-container">
         ${renderData('species', row['label'])}
+        ${renderData('expected species', row['expectedLabel'])}
         ${renderData('green', row['green'])}
         ${renderData('brown', row['brown'])}
         ${renderData('blurriness', row['blurriness'])}
